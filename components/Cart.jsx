@@ -13,8 +13,14 @@ import { urlFor } from "../lib/client";
 
 const Cart = () => {
   const cartRef = useRef();
-  const { totalPrice, totalQuantities, cartItems, setShowCart } =
-    useStateContext();
+  const {
+    totalPrice,
+    totalQuantities,
+    cartItems,
+    setShowCart,
+    toggleCartItemQuantity,
+    onRemove,
+  } = useStateContext();
   return (
     <div
       className="w-screen fixed right-0 top-0 z-40 transition-all duration-1000 ease-in-out bg-gray-600/50"
@@ -64,7 +70,7 @@ const Cart = () => {
                     <div className="flex flex-row">
                       <div
                         className="border-[1px] border-solid border-gray-400 flex items-center py-2 px-3 cursor-pointer"
-                        onClick={""}
+                        onClick={() => toggleCartItemQuantity(item._id, "dec")}
                       >
                         <AiOutlineMinus />
                       </div>
@@ -72,11 +78,11 @@ const Cart = () => {
                         className="border-y-[1px] border-solid border-gray-400 py-2 px-4"
                         onClick={""}
                       >
-                        1
+                        {item.quantity}
                       </span>
                       <div
                         className="border-[1px] border-solid border-gray-400 flex items-center py-2 px-3 cursor-pointer"
-                        onClick={""}
+                        onClick={() => toggleCartItemQuantity(item._id, "inc")}
                       >
                         <AiOutlinePlus />
                       </div>
@@ -84,7 +90,7 @@ const Cart = () => {
                     <button
                       type="button"
                       className="text-2xl text-red-500 cursor-pointer bg-transparent border-none"
-                      onClick=""
+                      onClick={() => onRemove(item)}
                     >
                       <TiDeleteOutline />
                     </button>
