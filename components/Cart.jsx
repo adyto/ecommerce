@@ -39,6 +39,7 @@ const Cart = () => {
     if (response.statusCode === 500) return;
 
     const data = await response.json();
+    console.log(data);
 
     toast.loading("Redirecting...");
 
@@ -98,10 +99,7 @@ const Cart = () => {
                       >
                         <AiOutlineMinus />
                       </div>
-                      <span
-                        className="border-y-[1px] border-solid border-gray-400 py-2 px-4"
-                        onClick={""}
-                      >
+                      <span className="border-y-[1px] border-solid border-gray-400 py-2 px-4">
                         {item.quantity}
                       </span>
                       <div

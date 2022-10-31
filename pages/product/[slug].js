@@ -14,7 +14,12 @@ const ProductDetails = ({ product, products }) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
 
-  const { incQty, decQty, qty, onAdd } = useStateContext();
+  const { incQty, decQty, qty, onAdd, setShowCart } = useStateContext();
+
+  const handleBuyNow = () => {
+    onAdd(product, qty);
+    setShowCart(true);
+  };
 
   return (
     <div className="flex flex-col gap-10 m-10 text-cyan-800">
@@ -27,6 +32,7 @@ const ProductDetails = ({ product, products }) => {
           <div className="flex gap-[10px] mt-5">
             {image?.map((item, i) => (
               <img
+                key={i}
                 src={urlFor(item)}
                 className={
                   i === index
@@ -62,10 +68,7 @@ const ProductDetails = ({ product, products }) => {
               >
                 <AiOutlineMinus />
               </div>
-              <span
-                className="border-y-[1px] border-solid border-gray-500 py-2 px-2"
-                onClick={""}
-              >
+              <span className="border-y-[1px] border-solid border-gray-500 py-2 px-2">
                 {qty}
               </span>
               <div
@@ -87,7 +90,7 @@ const ProductDetails = ({ product, products }) => {
             <button
               type="button"
               className="border-0 py-2 px-4 border-solid border-gray-500 text-lg font-medium bg-red-500 cursor-pointer w-48 transition-transform duration-500 scale-90 hover:scale-100 text-white"
-              onClick={""}
+              onClick={handleBuyNow}
             >
               Buy Now
             </button>

@@ -13,6 +13,7 @@ const Product = ({ product: { image, name, slug, price } }) => {
             width={250}
             height={250}
             className="rounded-2xl bg-gray-300 max-w-xl"
+            alt="img-product"
           />
           <p className="font-medium">{name}</p>
           <p className="font-extrabold mt-1 text-black">${price}</p>
