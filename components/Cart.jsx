@@ -24,6 +24,8 @@ const Cart = () => {
     onRemove,
   } = useStateContext();
 
+  console.log(totalPrice);
+
   const handleCheckout = async () => {
     const stripe = await getStripe();
 
@@ -51,7 +53,7 @@ const Cart = () => {
       className="w-screen fixed right-0 top-0 z-40 transition-all duration-1000 ease-in-out bg-gray-600/50"
       ref={cartRef}
     >
-      <div className="h-screen w-[600px] bg-white float-right py-10 px-3 relative">
+      <div className="h-screen xs:w-72 sm:w-96 lg:w-[600px] bg-white float-right py-10 px-3 relative">
         <button
           type="button"
           className="flex flex-row items-center font-medium text-lg cursor-pointer gap-[2px] ml-2 border-none bg-transparent"
@@ -62,48 +64,55 @@ const Cart = () => {
           <span className="ml-2 text-red-500">({totalQuantities} items)</span>
         </button>
         {cartItems.length < 1 && (
-          <div className="m-10 items-center flex flex-col">
+          <div className="xs:m-5 lg:m-10 items-center flex flex-col">
             <AiOutlineShopping size={150} />
-            <h1 className="font-semibold text-xl">
+            <h1 className="w-full font-semibold text-xl text-center">
               Your shopping bag is empty
             </h1>
-            <Link href={"/"}>
+            <Link href={"/"} className="text-center">
               <button
                 type="button"
                 onClick={() => setShowCart(false)}
-                className="w-screen max-w-sm py-2 px-3 rounded-2xl border-none text-xl mt-10 uppercase bg-red-500 text-white cursor-pointer scale-90 transition-transform duration-500 hover:scale-100"
+                className="xs:w-11/12 xs:font-medium xs:text-lg sm:w-72 w-screen max-w-sm py-2 px-3 rounded-2xl border-none text-xl mt-10 uppercase bg-red-500 text-white cursor-pointer scale-90 transition-transform duration-500 hover:scale-100"
               >
                 Continues Shopping
               </button>
             </Link>
           </div>
         )}
-        <div className="flex flex-wrap justify-center gap-4 mt-5 w-full">
+        <div className="flex flex-col justify-center gap-4 mt-5 w-full">
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
-              <div className="flex flex-row gap-7 p-7" key={item._id}>
+              <div
+                className="flex flex-row xs:gap-3 xs:p-1 lg:gap-7 lg:p-7"
+                key={item._id}
+              >
                 <img
                   src={urlFor(item?.image[0])}
-                  className="w-44 h-36 rounded-2xl bg-gray-300"
+                  className="xs:w-28 lg:w-44 lg:h-36 rounded-2xl bg-gray-300"
                 />
-                <div className="flex flex-col justify-around">
-                  <div className="flex flex-row justify-between w-[350px] text-sky-700">
-                    <h2 className="font-bold">{item.name}</h2>
-                    <h3 className="font-bold">${item.price}</h3>
+                <div className="flex flex-col justify-around w-full">
+                  <div className="flex flex-row justify-between items-center lg:w-[350px] text-sky-700">
+                    <h2 className="xs:text-sm sm:text-base font-bold">
+                      {item.name}
+                    </h2>
+                    <h3 className="xs:text-sm sm:text-base font-bold">
+                      ${item.price}
+                    </h3>
                   </div>
                   <div className="flex flex-row justify-between">
                     <div className="flex flex-row">
                       <div
-                        className="border-[1px] border-solid border-gray-400 flex items-center py-2 px-3 cursor-pointer"
+                        className="border-[1px] border-solid border-gray-400 flex items-center xs:h-8 xs:px-1 lg:py-2 lg:px-3 cursor-pointer"
                         onClick={() => toggleCartItemQuantity(item._id, "dec")}
                       >
                         <AiOutlineMinus />
                       </div>
-                      <span className="border-y-[1px] border-solid border-gray-400 py-2 px-4">
+                      <span className="border-y-[1px] border-solid border-gray-400 xs:w-6 text-center">
                         {item.quantity}
                       </span>
                       <div
-                        className="border-[1px] border-solid border-gray-400 flex items-center py-2 px-3 cursor-pointer"
+                        className="border-[1px] border-solid border-gray-400 flex items-center xs:h-8 xs:px-2 lg:py-2 lg:px-3 cursor-pointer"
                         onClick={() => toggleCartItemQuantity(item._id, "inc")}
                       >
                         <AiOutlinePlus />
@@ -122,12 +131,12 @@ const Cart = () => {
             ))}
         </div>
         {cartItems.length >= 1 && (
-          <div className="absolute bottom-3 right-1 w-full py-7 px-16">
-            <div className="flex flex-row justify-between">
+          <div className="absolute inset-x-0 bottom-0 w-full mb-3">
+            <div className="flex flex-row justify-around">
               <h4 className="text-xl font-bold">SubTotal:</h4>
               <h5 className="text-xl font-bold">${totalPrice}</h5>
             </div>
-            <div className="w-96 m-auto">
+            <div className="xs:w-full lg:w-96 m-auto">
               <button
                 type="button"
                 className="w-full max-w-sm py-2 px-3 rounded-2xl border-none text-xl mt-10 uppercase bg-red-500 text-white cursor-pointer scale-90 transition-transform duration-500 hover:scale-100"

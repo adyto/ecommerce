@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
   return (
     <div className="p-3">
       <Head>
+        <link rel="shortcut icon" href="/logo-adyto.png" />
         <title>Ady.to STORE</title>
       </Head>
       <header>

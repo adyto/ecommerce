@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -16,8 +16,8 @@ const ProductDetails = ({ product, products }) => {
 
   const { incQty, decQty, qty, onAdd, setShowCart } = useStateContext();
 
-  const handleBuyNow = () => {
-    onAdd(product, qty);
+  const handleBuyNow = async () => {
+    await onAdd(product, qty);
     setShowCart(true);
   };
 
