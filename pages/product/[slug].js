@@ -22,31 +22,31 @@ const ProductDetails = ({ product, products }) => {
   };
 
   return (
-    <div className="flex flex-col gap-10 m-10 text-cyan-800">
-      <div className="flex flex-row gap-6">
+    <div className="flex flex-col m-2 gap-2 xs:m-4 xs:gap-6 sm:gap-8 sm:m-8 lg:gap-10 lg:m-10 text-cyan-800">
+      <div className="flex flex-row gap-2 sm:gap-4 lg:gap-6">
         <div className="flex flex-col">
           <img
             src={urlFor(image && image[index])}
-            className="rounded-2xl bg-gray-300 w-96 h-96 cursor-pointer duration-300 ease-in-out hover:bg-red-500"
+            className="rounded-2xl bg-gray-300 w-32 h-32 xs:w-80 xs:h-48 sm:w-96 sm:h-60 lg:h-80 cursor-pointer duration-300 ease-in-out hover:bg-red-500"
           />
-          <div className="flex gap-[10px] mt-5">
+          <div className="flex flex-row gap-1 mt-2 xs:gap-1 xs:mt-2 lg:gap-[10px] lg:mt-5">
             {image?.map((item, i) => (
               <img
                 key={i}
                 src={urlFor(item)}
                 className={
                   i === index
-                    ? "rounded-lg  w-16 h-16 cursor-pointer bg-red-500"
-                    : "bg-gray-300 rounded-lg w-16 h-16 cursor-pointer"
+                    ? "rounded-lg w-10 h-10 xs:w-9 xs:h-9 sm:w-12 sm:h-12 lg:w-16 lg:h-16 cursor-pointer bg-red-500"
+                    : "bg-gray-300 rounded-lg w-10 h-10 xs:w-9 xs:h-9 sm:w-12 sm:h-12 lg:w-16 lg:h-16 cursor-pointer"
                 }
                 onMouseEnter={() => setIndex(i)}
               />
             ))}
           </div>
         </div>
-        <div className="">
-          <h1 className="font-bold">{name}</h1>
-          <div className="text-red-500 mt-3 flex flex-row gap-1 items-center">
+        <div className="flex flex-col w-full">
+          <h1 className="font-bold text-xs sm:text-base lg:text-lg">{name}</h1>
+          <div className="text-red-500 xs:mt-1 sm:mt-2 lg:mt-3 flex flex-row gap-1 items-center">
             <div className="flex flex-row">
               <AiFillStar />
               <AiFillStar />
@@ -54,42 +54,52 @@ const ProductDetails = ({ product, products }) => {
               <AiFillStar />
               <AiOutlineStar />
             </div>
-            <p className="text-cyan-800">(20)</p>
+            <p className="text-cyan-800 xs:text-xs sm:text-base lg:text-lg">
+              (20)
+            </p>
           </div>
-          <h2 className="mt-2 font-bold">Details:</h2>
-          <p className="mt-2">{details}</p>
-          <p className="text-red-500 font-bold text-2xl mt-6">${price}</p>
-          <div className="flex flex-col sm:flex-row gap-5 mt-2 items-center">
-            <h3 className="font-bold">Quantity:</h3>
-            <div className="flex flex-row">
+          <h2 className="font-bold xs:mt-1 xs:text-xs sm:mt-2 sm:text-base lg:text-lg">
+            Details:
+          </h2>
+          <p className="xs:text-xs sm:mt-1 sm:text-base lg:text-lg">
+            {details}
+          </p>
+          <p className="text-red-500 font-bold xs:text-base xs:mt-2 sm:text-2xl sm:mt-2 lg:text-3xl">
+            ${price}
+          </p>
+          <div className="flex flex-row xs:gap-2 sm:gap-3 lg:gap-5 mt-2 items-center">
+            <h3 className="font-bold xs:text-xs sm:text-base lg:text-lg">
+              Quantity:
+            </h3>
+            <div className="flex flex-row items-center">
               <div
-                className="border-[1px] border-solid border-gray-500 flex items-center py-2 px-2 cursor-pointer"
+                className="border-[1px] border-solid border-gray-400 flex items-center xs:py-1 xs:px-1 xs:h-8 sm:py-2 sm:px-2 cursor-pointer"
                 onClick={decQty}
               >
                 <AiOutlineMinus />
               </div>
-              <span className="border-y-[1px] border-solid border-gray-500 py-2 px-2">
+              <span className="text-center border-y-[1px] border-solid border-gray-400 xs:py-1 xs:px-1 xs:h-8 xs:w-10 sm:py-auto sm:px-2">
                 {qty}
               </span>
               <div
-                className="border-[1px] border-solid border-gray-500 flex items-center py-2 px-2 cursor-pointer"
+                className="border-[1px] border-solid border-gray-400 flex items-center xs:py-1 xs:px-1 xs:h-8 sm:py-2 sm:px-2 cursor-pointer"
                 onClick={incQty}
               >
                 <AiOutlinePlus />
               </div>
             </div>
           </div>
-          <div className="mt-7">
+          <div className="xs:mt-2 lg:mt-7 flex flex-col items-start lg:gap-1 lg:flex-row">
             <button
               type="button"
-              className="border-[1px] py-2 px-4 border-solid border-gray-500 text-lg font-medium bg-white cursor-pointer w-48 transition-transform duration-500 scale-90 hover:scale-100 text-red-500"
+              className="font-medium border-[1px] border-solid rounded-md border-gray-400 bg-white cursor-pointer transition-transform duration-500 scale-90 hover:scale-100 text-red-500 xs:py-1 xs:px-1 xs:w-40 sm:py-2 sm:px-4 sm:text-lg sm:w-48 lg:w-52"
               onClick={() => onAdd(product, qty)}
             >
               Add to Cart
             </button>
             <button
               type="button"
-              className="border-0 py-2 px-4 border-solid border-gray-500 text-lg font-medium bg-red-500 cursor-pointer w-48 transition-transform duration-500 scale-90 hover:scale-100 text-white"
+              className="font-medium border-[1px] border-none rounded-md border-gray-400 bg-red-500 cursor-pointer transition-transform duration-500 scale-90 hover:scale-100 text-white xs:py-1 xs:px-1 xs:w-40 sm:py-2 sm:px-4 sm:text-lg sm:w-48 lg:w-52"
               onClick={handleBuyNow}
             >
               Buy Now
@@ -97,7 +107,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
       </div>
-      <div className="mt-32">
+      <div className="xs:mt-16 lg:mt-32">
         <h4 className="text-center text-cyan-800 text-3xl font-bold">
           You may also like
         </h4>
