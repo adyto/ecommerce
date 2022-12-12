@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Cart,
   Footer,
@@ -7,8 +7,8 @@ import {
   Layout,
   Navbar,
   Product,
-} from "../components";
-import { client } from "../lib/client";
+} from '../components';
+import { client } from '../lib/client';
 
 const Home = ({ products, bannerData }) => {
   return (
